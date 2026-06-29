@@ -521,7 +521,6 @@ export default function App() {
   if (!currentUser) return <LoginPage onLogin={(u) => { setCurrentUser(u); setTab(u.role === "Utilisateur" ? "reservations" : "dashboard"); }} />;
 
   const isAdmin = currentUser.role === "Admin";
-  const isTech = currentUser.role === "Technicien";
   const isUser = currentUser.role === "Utilisateur";
 
   const TABS = isUser
