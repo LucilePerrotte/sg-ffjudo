@@ -99,8 +99,7 @@ const btnS = { background: COLORS.success, color: "#fff", border: "none", border
 const btnD = { background: COLORS.danger, color: "#fff", border: "none", borderRadius: 8, padding: "6px 12px", cursor: "pointer", fontWeight: 600, fontSize: 13 };
 const fmtDate = (dt) => { if (!dt) return ""; const [d, t] = dt.split("T"); return t ? `${d} à ${t}` : d; };
 
-const LOGO_URL = "https://upload.wikimedia.org/wikipedia/fr/thumb/7/7b/Logo_France_Judo_2021.svg/1200px-Logo_France_Judo_2021.svg.png";
-
+const LOGO_URL = "/logo-france-judo.png";
 const LoginPage = ({ onLogin }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
