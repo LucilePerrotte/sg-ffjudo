@@ -333,7 +333,7 @@ const LoginPage = ({ onLogin }) => {
         {/* Logo */}
         <div style={{ textAlign: "center", marginBottom: 32 }}>
           <div style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", background: "#fff", border: `1px solid ${COLORS.border}`, borderRadius: 16, width: 120, height: 72, marginBottom: 12, padding: 8 }}>
-            <img src="https://upload.wikimedia.org/wikipedia/fr/thumb/7/7b/Logo_France_Judo_2021.svg/1200px-Logo_France_Judo_2021.svg.png" alt="France Judo" style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain" }} />
+            <img src="/logo-france-judo.png" alt="France Judo" style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain" }} />
           </div>
           <div style={{ fontWeight: 800, fontSize: 20, color: COLORS.primary }}>Services Généraux</div>
           <div style={{ fontSize: 13, color: COLORS.muted, marginTop: 2 }}>France Judo</div>
@@ -665,7 +665,7 @@ export default function App() {
       {/* Header */}
       <div style={{ background: COLORS.primary, padding: "0 24px", display: "flex", alignItems: "center", gap: 12, height: 56 }}>
         <div style={{ background: "#fff", borderRadius: 8, width: 44, height: 34, display: "flex", alignItems: "center", justifyContent: "center", padding: "2px 4px" }}>
-          <img src="https://upload.wikimedia.org/wikipedia/fr/thumb/7/7b/Logo_France_Judo_2021.svg/1200px-Logo_France_Judo_2021.svg.png" alt="France Judo" style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain" }} />
+          <img src="/logo-france-judo.png" alt="France Judo" style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain" }} />
         </div>
         <span style={{ color: "#fff", fontWeight: 700, fontSize: 15 }}>Services Généraux — France Judo</span>
         <div style={{ flex: 1 }} />
