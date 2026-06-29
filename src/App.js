@@ -21,49 +21,259 @@ const EVENEMENTS_CATALOGUE = [
 
 const MATERIEL_PAR_CAT = {
   "Mobilier": [
-    { id: 1, nom: "Table pliante", qte: 20, disponible: 18 },
-    { id: 2, nom: "Chaise empilable", qte: 80, disponible: 72 },
-    { id: 3, nom: "Mange-debout", qte: 10, disponible: 10 },
+    { id: 1, nom: "Tables pliantes 180cm", qte: 25, disponible: 25, stockage: "Local technique", batiment: "Bât. C - Dojo de Paris" },
+    { id: 2, nom: "Tables pliantes 120cm", qte: 2, disponible: 2, stockage: "Local technique", batiment: "Bât. C - Dojo de Paris" },
+    { id: 3, nom: "Chaises empilables", qte: 150, disponible: 150, stockage: "Local technique", batiment: "Bât. C - Dojo de Paris" },
+    { id: 4, nom: "Pupitre orateur", qte: 2, disponible: 2, stockage: "Stockage -3", batiment: "Bât. C - Dojo de Paris" },
+    { id: 5, nom: "Mange debout carré (Dojo)", qte: 10, disponible: 10, stockage: "Stockage -3", batiment: "Bât. C - Dojo de Paris" },
+    { id: 6, nom: "Mange debout carré (VIP)", qte: 4, disponible: 4, stockage: "Espace VIP", batiment: "Grand Dôme" },
+    { id: 7, nom: "Fauteuil VIP beige", qte: 6, disponible: 6, stockage: "Espace VIP", batiment: "Grand Dôme" },
+    { id: 8, nom: "Table basse vitrée / or", qte: 3, disponible: 3, stockage: "Espace VIP", batiment: "Grand Dôme" },
   ],
-  "Audiovisuel": [
-    { id: 4, nom: "Vidéoprojecteur", qte: 4, disponible: 3 },
-    { id: 5, nom: "Écran de projection", qte: 3, disponible: 3 },
-    { id: 6, nom: "Sono portable", qte: 2, disponible: 1 },
-    { id: 7, nom: "Micro HF", qte: 6, disponible: 5 },
+  "AV-Technique": [
+    { id: 9, nom: "Écran 75 pouces", qte: 2, disponible: 2, stockage: "", batiment: "" },
+    { id: 10, nom: "Écran 55 pouces", qte: 25, disponible: 25, stockage: "Espace stockage A", batiment: "Grand Dôme" },
+    { id: 11, nom: "Pied pour écran", qte: 16, disponible: 16, stockage: "Espace stockage A", batiment: "Grand Dôme" },
+    { id: 12, nom: "Vidéoprojecteur", qte: 3, disponible: 3, stockage: "", batiment: "" },
+    { id: 13, nom: "Écran de projection", qte: 2, disponible: 2, stockage: "", batiment: "" },
+    { id: 14, nom: "Sonorisation portable (enceinte + 1 micro)", qte: 2, disponible: 2, stockage: "Stockage -3", batiment: "Bât. C - Dojo de Paris" },
+    { id: 15, nom: "Rallonges électriques (lot 25m)", qte: 8, disponible: 8, stockage: "", batiment: "" },
+    { id: 16, nom: "Box LED color (lot de 6)", qte: 6, disponible: 6, stockage: "Espace stockage A", batiment: "Grand Dôme" },
+    { id: 17, nom: "Arbitrage vidéo (lot pour 1 tapis)", qte: 8, disponible: 8, stockage: "Espace stockage A", batiment: "Grand Dôme" },
+    { id: 18, nom: "Système commissaire sportif (lot pour 1 tapis)", qte: 16, disponible: 16, stockage: "Espace stockage A", batiment: "Grand Dôme" },
   ],
-  "Informatique": [
-    { id: 8, nom: "Câble HDMI", qte: 15, disponible: 12 },
-    { id: 9, nom: "Rallonge multiprise", qte: 10, disponible: 9 },
-    { id: 10, nom: "Webcam USB", qte: 4, disponible: 4 },
+  "Sportif": [
+    { id: 19, nom: "Tatami rouge", qte: 200, disponible: 200, stockage: "Stockage -3", batiment: "Bât. C - Dojo de Paris" },
+    { id: 20, nom: "Tatami blanc", qte: 150, disponible: 150, stockage: "Stockage -3", batiment: "Bât. C - Dojo de Paris" },
+    { id: 21, nom: "Tatami bleu", qte: 200, disponible: 200, stockage: "Espace stockage A", batiment: "Grand Dôme" },
+    { id: 22, nom: "Tatami jaune", qte: 200, disponible: 200, stockage: "Espace stockage A", batiment: "Grand Dôme" },
+    { id: 23, nom: "Bandeaux LED", qte: 68, disponible: 68, stockage: "Espace stockage A", batiment: "Grand Dôme" },
   ],
-  "Événementiel": [
-    { id: 11, nom: "Barrière Vauban", qte: 30, disponible: 30 },
-    { id: 12, nom: "Kakémono FFJudo", qte: 8, disponible: 7 },
-    { id: 13, nom: "Nappe blanche", qte: 20, disponible: 18 },
+  "Signalétique": [
+    { id: 24, nom: "Barrières Vauban", qte: 100, disponible: 100, stockage: "Plateau principal", batiment: "Grand Dôme" },
+    { id: 25, nom: "Kakémonos digitaux", qte: 4, disponible: 4, stockage: "Espace stockage A", batiment: "Grand Dôme" },
   ],
 };
 
 const EQUIPEMENTS_DATA = [
-  { id: 1, nom: "CTA Toiture R+5", categorie: "CVC", batiment: "Institut du Judo", espace: "Toiture R+5", serie: "CTA-IJ-01", dateAchat: "2020-01-15", finGarantie: "2026-06-30", etat: "Bon", preventif: "Semestriel", prestataire: "Engie Cofely" },
-  { id: 2, nom: "Fan coil Bureau 301", categorie: "CVC", batiment: "Institut du Judo", espace: "Bureau 301", serie: "FC-301", dateAchat: "2019-06-01", finGarantie: "2024-12-31", etat: "En maintenance", preventif: "Annuel", prestataire: "Engie Cofely" },
-  { id: 3, nom: "Groupe électrogène", categorie: "Électrique", batiment: "Grand Dôme", espace: "Local technique", serie: "GE-GD-01", dateAchat: "2021-03-10", finGarantie: "2027-03-15", etat: "Bon", preventif: "Mensuel", prestataire: "Engie Cofely" },
-  { id: 4, nom: "Éclairage secours Dojo", categorie: "Sécurité", batiment: "Dojo de Paris", espace: "Dojo principal", serie: "ES-DP-12", dateAchat: "2018-09-01", finGarantie: "2025-09-01", etat: "Bon", preventif: "Annuel", prestataire: "IPSI" },
-  { id: 5, nom: "Ascenseur principal", categorie: "Élévation", batiment: "Institut du Judo", espace: "Hall RDC", serie: "ASC-IJ-01", dateAchat: "2017-01-01", finGarantie: "2028-01-01", etat: "Bon", preventif: "Mensuel", prestataire: "Schindler" },
-  { id: 6, nom: "SSI Centrale", categorie: "Sécurité", batiment: "Institut du Judo", espace: "Local sécurité", serie: "SSI-IJ-01", dateAchat: "2019-01-01", finGarantie: "2026-01-01", etat: "Bon", preventif: "Annuel", prestataire: "IPSI" },
+  { id: 1, nom: "CTA", categorie: "CVC", batiment: "", espace: "", serie: "CTA-2021-001", dateAchat: "2021-06-01", finGarantie: "2024-06-01", etat: "Bon", preventif: "Trimestriel", prestataire: "Atalian Maintenance & Energy" },
+  { id: 2, nom: "Ballons eau chaude", categorie: "CVC", batiment: "", espace: "", serie: "CHAUD-2018-A", dateAchat: "2018-03-15", finGarantie: "2021-03-15", etat: "À surveiller", preventif: "Annuel", prestataire: "Powesco" },
+  { id: 3, nom: "Tableau électrique SIE", categorie: "Électricité", batiment: "Bât. A – Bureaux", espace: "Siège Fédération", serie: "ELEC-TGT-A", dateAchat: "2015-01-01", finGarantie: "", etat: "Bon", preventif: "Annuel", prestataire: "Électricité ?" },
+  { id: 4, nom: "Tableau électrique DOP", categorie: "Électricité", batiment: "Bât. C - Dojo de Paris", espace: "Dojo de Paris", serie: "ELEC-TGT-B", dateAchat: "2019-06-01", finGarantie: "", etat: "Bon", preventif: "Annuel", prestataire: "Électricité ?" },
+  { id: 5, nom: "Tableau électrique VLB", categorie: "Électricité", batiment: "Grand Dôme", espace: "Grand Dôme de Villebon", serie: "ELEC-TGT-S2", dateAchat: "2020-11-01", finGarantie: "", etat: "Bon", preventif: "Annuel", prestataire: "Électricité ?" },
+  { id: 6, nom: "Groupe électrogène – Bât. B", categorie: "Électricité", batiment: "", espace: "", serie: "GE-2020-001", dateAchat: "2020-05-01", finGarantie: "2023-05-01", etat: "Bon", preventif: "Semestriel", prestataire: "" },
+  { id: 7, nom: "Éclairage de sécurité SIE", categorie: "Sécurité", batiment: "Bât. A – Bureaux", espace: "Siège Fédération", serie: "BAES-ESP05", dateAchat: "", finGarantie: "", etat: "Bon", preventif: "Annuel", prestataire: "IPSI" },
+  { id: 8, nom: "Éclairage de sécurité DOP", categorie: "Sécurité", batiment: "Bât. C - Dojo de Paris", espace: "Dojo de Paris", serie: "BAES-ESP10", dateAchat: "", finGarantie: "", etat: "Bon", preventif: "Annuel", prestataire: "IPSI" },
+  { id: 9, nom: "Éclairage de sécurité VLB", categorie: "Sécurité", batiment: "Grand Dôme", espace: "Grand Dôme de Villebon", serie: "BAES-ESP16", dateAchat: "", finGarantie: "", etat: "Bon", preventif: "Annuel", prestataire: "IPSI" },
+  { id: 10, nom: "Extincteurs DOP", categorie: "Sécurité", batiment: "Bât. C - Dojo de Paris", espace: "Dojo de Paris", serie: "EXT-A-2022", dateAchat: "2022-01-01", finGarantie: "", etat: "Bon", preventif: "Annuel", prestataire: "IPSI" },
+  { id: 11, nom: "Extincteurs SIE", categorie: "Sécurité", batiment: "Bât. A – Bureaux", espace: "Siège Fédération", serie: "EXT-B-2022", dateAchat: "2022-01-01", finGarantie: "", etat: "Bon", preventif: "Annuel", prestataire: "IPSI" },
+  { id: 12, nom: "Extincteurs VLB", categorie: "Sécurité", batiment: "Grand Dôme", espace: "Grand Dôme de Villebon", serie: "EXT-S2-2022", dateAchat: "2022-01-01", finGarantie: "", etat: "Bon", preventif: "Annuel", prestataire: "IPSI" },
+  { id: 13, nom: "Robinetterie SIE", categorie: "Plomberie", batiment: "Bât. A – Bureaux", espace: "Siège Fédération", serie: "", dateAchat: "", finGarantie: "", etat: "À surveiller", preventif: "", prestataire: "DOUVENEAU" },
+  { id: 14, nom: "Robinetterie DOP", categorie: "Plomberie", batiment: "Grand Dôme", espace: "", serie: "", dateAchat: "", finGarantie: "", etat: "Bon", preventif: "", prestataire: "DOUVENEAU" },
+  { id: 15, nom: "Robinetterie VLB", categorie: "Plomberie", batiment: "Grand Dôme", espace: "", serie: "", dateAchat: "", finGarantie: "", etat: "Bon", preventif: "", prestataire: "DOUVENEAU" },
+  { id: 16, nom: "Sonorisation Awazu", categorie: "Sportif", batiment: "Bât. B – Awazu", espace: "Dojo Awazu", serie: "SONO-2019-B", dateAchat: "2019-10-01", finGarantie: "2022-10-01", etat: "Bon", preventif: "Non", prestataire: "Magnum" },
+  { id: 17, nom: "Sonorisation DOP", categorie: "Sportif", batiment: "Bât. C - Dojo de Paris", espace: "Dojo de Paris", serie: "SONO-2017-DJ", dateAchat: "2017-05-01", finGarantie: "", etat: "À surveiller", preventif: "Non", prestataire: "Magnum" },
+  { id: 18, nom: "Ascenseurs SIE", categorie: "Autre", batiment: "Bât. A – Bureaux", espace: "Siège Fédération", serie: "ASC-A-2016", dateAchat: "2016-09-01", finGarantie: "", etat: "Bon", preventif: "Semestriel", prestataire: "OTIS" },
+  { id: 19, nom: "Ascenseurs DOP", categorie: "Autre", batiment: "Bât. C - Dojo de Paris", espace: "Dojo de Paris", serie: "", dateAchat: "", finGarantie: "", etat: "", preventif: "", prestataire: "OTIS" },
+  { id: 20, nom: "Ascenseurs Awazu", categorie: "Autre", batiment: "Bât. B – Awazu", espace: "Dojo Awazu", serie: "", dateAchat: "", finGarantie: "", etat: "", preventif: "", prestataire: "OTIS" },
+  { id: 21, nom: "Nettoyeur haute pression", categorie: "Autre", batiment: "", espace: "", serie: "NHP-2022", dateAchat: "2022-08-01", finGarantie: "2024-08-01", etat: "Hors service", preventif: "Non", prestataire: "" },
+  { id: 22, nom: "Autolaveuse sol", categorie: "Autre", batiment: "", espace: "", serie: "AUTOL-2019", dateAchat: "2019-04-01", finGarantie: "", etat: "À surveiller", preventif: "Non", prestataire: "" },
+  { id: 23, nom: "Portail entrée", categorie: "Sécurité", batiment: "Grand Dôme", espace: "Parking", serie: "", dateAchat: "", finGarantie: "", etat: "Hors service", preventif: "", prestataire: "Secure IP" },
+  { id: 24, nom: "Dalle LED 60×60 (Bon)", categorie: "Éclairage", batiment: "", espace: "", serie: "", dateAchat: "", finGarantie: "", etat: "Bon", preventif: "", prestataire: "Ledkia" },
+  { id: 25, nom: "Dalle LED 60×60 (HS)", categorie: "Éclairage", batiment: "", espace: "", serie: "", dateAchat: "", finGarantie: "", etat: "Hors service", preventif: "", prestataire: "Ledkia" },
+  { id: 26, nom: "Babyfoot (Awazu)", categorie: "Loisirs", batiment: "Bât. B – Awazu", espace: "Cantine Dojo Academy", serie: "", dateAchat: "", finGarantie: "", etat: "", preventif: "", prestataire: "" },
+  { id: 27, nom: "Babyfoot (Bureaux)", categorie: "Loisirs", batiment: "Bât. A – Bureaux", espace: "Entresol", serie: "", dateAchat: "", finGarantie: "", etat: "", preventif: "", prestataire: "" },
 ];
 
 const ESPACES_DATA = [
-  { id: 1, nom: "Salle de réunion A", batiment: "Institut du Judo", etage: "3", surface: 28, site: "Paris 13e", ref: "IJ-SR-A" },
-  { id: 2, nom: "Salle de réunion B", batiment: "Institut du Judo", etage: "3", surface: 35, site: "Paris 13e", ref: "IJ-SR-B" },
-  { id: 3, nom: "Grand Dojo", batiment: "Dojo de Paris", etage: "RDC", surface: 600, site: "Paris", ref: "DP-DJ-01" },
-  { id: 4, nom: "Espace cocktail", batiment: "Grand Dôme", etage: "1", surface: 400, site: "Villebon-sur-Yvette", ref: "GD-CK-01" },
-  { id: 5, nom: "Hall d'accueil", batiment: "Institut du Judo", etage: "RDC", surface: 120, site: "Paris 13e", ref: "IJ-HA-01" },
+  // Bât. A – Bureaux – RDC
+  { id: 1, nom: "Accueil principal", batiment: "Bât. A – Bureaux", etage: "RDC", surface: null, site: "Paris", ref: "ESP-A001", contact: "" },
+  { id: 2, nom: "Bureau Mathias Chauvet", batiment: "Bât. A – Bureaux", etage: "RDC", surface: null, site: "Paris", ref: "ESP-A002", contact: "" },
+  { id: 3, nom: "Bureau Cécilia", batiment: "Bât. A – Bureaux", etage: "RDC", surface: null, site: "Paris", ref: "ESP-A003", contact: "" },
+  { id: 4, nom: "Reprographie", batiment: "Bât. A – Bureaux", etage: "RDC", surface: null, site: "Paris", ref: "ESP-A003", contact: "" },
+  { id: 5, nom: "Sanitaires Hommes", batiment: "Bât. A – Bureaux", etage: "RDC", surface: null, site: "Paris", ref: "ESP-A004", contact: "" },
+  { id: 6, nom: "Sanitaires Femmes", batiment: "Bât. A – Bureaux", etage: "RDC", surface: null, site: "Paris", ref: "ESP-A005", contact: "" },
+  // Bât. A – Entresol
+  { id: 7, nom: "Entresol", batiment: "Bât. A – Bureaux", etage: "Entresol", surface: 300, site: "Paris", ref: "ESP-AE01", contact: "Marie Dupont – 06 XX XX XX XX" },
+  { id: 8, nom: "Sanitaires Hommes", batiment: "Bât. A – Bureaux", etage: "Entresol", surface: 80, site: "Paris", ref: "ESP-AE02", contact: "Marie Dupont – 06 XX XX XX XX" },
+  { id: 9, nom: "Sanitaires Femmes", batiment: "Bât. A – Bureaux", etage: "Entresol", surface: null, site: "Paris", ref: "ESP-AE03", contact: "" },
+  { id: 10, nom: "Local CSE", batiment: "Bât. A – Bureaux", etage: "Entresol", surface: 80, site: "Paris", ref: "ESP-AE04", contact: "Marie Dupont – 06 XX XX XX XX" },
+  // Bât. A – R+1
+  { id: 11, nom: "Salle à manger", batiment: "Bât. A – Bureaux", etage: "R+1", surface: 30, site: "Paris", ref: "ESP-A101", contact: "Marie Dupont – 06 XX XX XX XX" },
+  { id: 12, nom: "Cuisine", batiment: "Bât. A – Bureaux", etage: "R+1", surface: null, site: "Paris", ref: "ESP-A102", contact: "" },
+  { id: 13, nom: "Bureau Larbi Benboudaoud / Bastien Puget", batiment: "Bât. A – Bureaux", etage: "R+1", surface: null, site: "Paris", ref: "ESP-A103", contact: "" },
+  { id: 14, nom: "Bureau Frédérique Jossinet", batiment: "Bât. A – Bureaux", etage: "R+1", surface: null, site: "Paris", ref: "ESP-A104", contact: "" },
+  { id: 15, nom: "Bureau Sébastien Nolesini", batiment: "Bât. A – Bureaux", etage: "R+1", surface: null, site: "Paris", ref: "ESP-105", contact: "" },
+  { id: 16, nom: "Bureau DTN", batiment: "Bât. A – Bureaux", etage: "R+1", surface: null, site: "Paris", ref: "ESP-106", contact: "" },
+  { id: 17, nom: "Bureau Sébastien Mansois", batiment: "Bât. A – Bureaux", etage: "R+1", surface: null, site: "Paris", ref: "ESP-A107", contact: "" },
+  { id: 18, nom: "Reprographie", batiment: "Bât. A – Bureaux", etage: "R+1", surface: null, site: "Paris", ref: "ESP-A108", contact: "" },
+  { id: 19, nom: "Sanitaires DTN", batiment: "Bât. A – Bureaux", etage: "R+1", surface: null, site: "Paris", ref: "ESP-A109", contact: "" },
+  { id: 20, nom: "Salle de réunion Prestige", batiment: "Bât. A – Bureaux", etage: "R+1", surface: null, site: "Paris", ref: "ESP-A110", contact: "" },
+  { id: 21, nom: "Bureau International", batiment: "Bât. A – Bureaux", etage: "R+1", surface: null, site: "Paris", ref: "ESP-A111", contact: "" },
+  { id: 22, nom: "Bureau Margot Deniau-Rosato", batiment: "Bât. A – Bureaux", etage: "R+1", surface: null, site: "Paris", ref: "ESP-A112", contact: "" },
+  { id: 23, nom: "Bureau Stéphane Nomis", batiment: "Bât. A – Bureaux", etage: "R+1", surface: null, site: "Paris", ref: "ESP-A113", contact: "" },
+  { id: 24, nom: "Salon Prestige", batiment: "Bât. A – Bureaux", etage: "R+1", surface: null, site: "Paris", ref: "ESP-A114", contact: "" },
+  { id: 25, nom: "Local Boissons - Salon Prestige", batiment: "Bât. A – Bureaux", etage: "R+1", surface: null, site: "Paris", ref: "ESP-A115", contact: "" },
+  { id: 26, nom: "Local Stockage - Couloir", batiment: "Bât. A – Bureaux", etage: "R+1", surface: null, site: "Paris", ref: "ESP-A116", contact: "" },
+  { id: 27, nom: "Salle du Conseil", batiment: "Bât. A – Bureaux", etage: "R+1", surface: null, site: "Paris", ref: "ESP-A117", contact: "" },
+  { id: 28, nom: "Cave", batiment: "Bât. A – Bureaux", etage: "R+1", surface: null, site: "Paris", ref: "ESP-A118", contact: "" },
+  { id: 29, nom: "Sanitaires Hommes", batiment: "Bât. A – Bureaux", etage: "R+1", surface: null, site: "Paris", ref: "ESP-A119a", contact: "" },
+  { id: 30, nom: "Sanitaires Femmes", batiment: "Bât. A – Bureaux", etage: "R+1", surface: null, site: "Paris", ref: "ESP-A119b", contact: "" },
+  // Bât. A – R+2
+  { id: 31, nom: "Salle F1", batiment: "Bât. A – Bureaux", etage: "R+2", surface: null, site: "Paris", ref: "ESP-A201a", contact: "" },
+  { id: 32, nom: "Salle F2", batiment: "Bât. A – Bureaux", etage: "R+2", surface: null, site: "Paris", ref: "ESP-A201b", contact: "" },
+  { id: 33, nom: "Salle F3", batiment: "Bât. A – Bureaux", etage: "R+2", surface: null, site: "Paris", ref: "ESP-A201c", contact: "" },
+  { id: 34, nom: "Sanitaires Hommes", batiment: "Bât. A – Bureaux", etage: "R+2", surface: null, site: "Paris", ref: "ESP-A202a", contact: "" },
+  { id: 35, nom: "Sanitaires Femmes", batiment: "Bât. A – Bureaux", etage: "R+2", surface: null, site: "Paris", ref: "ESP-A202b", contact: "" },
+  { id: 36, nom: "Salon Budapest", batiment: "Bât. A – Bureaux", etage: "R+2", surface: null, site: "Paris", ref: "ESP-A203", contact: "" },
+  { id: 37, nom: "Bureau Olivier Mélicine - Lionel Bonhomme", batiment: "Bât. A – Bureaux", etage: "R+2", surface: null, site: "Paris", ref: "ESP-A204", contact: "" },
+  { id: 38, nom: "Bureau Coordo Formation", batiment: "Bât. A – Bureaux", etage: "R+2", surface: null, site: "Paris", ref: "ESP-A205", contact: "" },
+  { id: 39, nom: "Local stockage Formation", batiment: "Bât. A – Bureaux", etage: "R+2", surface: null, site: "Paris", ref: "ESP-A206a", contact: "" },
+  { id: 40, nom: "Local serveur", batiment: "Bât. A – Bureaux", etage: "R+2", surface: null, site: "Paris", ref: "ESP-A206b", contact: "" },
+  { id: 41, nom: "Local stockage SG x2", batiment: "Bât. A – Bureaux", etage: "R+2", surface: null, site: "Paris", ref: "ESP-A207", contact: "" },
+  { id: 42, nom: "Bureau Virginie Amaté", batiment: "Bât. A – Bureaux", etage: "R+2", surface: null, site: "Paris", ref: "ESP-A208", contact: "" },
+  { id: 43, nom: "Local stockage Sportif", batiment: "Bât. A – Bureaux", etage: "R+2", surface: null, site: "Paris", ref: "ESP-A209", contact: "" },
+  { id: 44, nom: "Bureau Com-Marketing Formation", batiment: "Bât. A – Bureaux", etage: "R+2", surface: null, site: "Paris", ref: "ESP-A210", contact: "" },
+  { id: 45, nom: "Bureau Admin Formation", batiment: "Bât. A – Bureaux", etage: "R+2", surface: null, site: "Paris", ref: "ESP-A211", contact: "" },
+  { id: 46, nom: "Local stockage CNKDR", batiment: "Bât. A – Bureaux", etage: "R+2", surface: null, site: "Paris", ref: "ESP-A212", contact: "" },
+  { id: 47, nom: "Bureau Mikael Margerit", batiment: "Bât. A – Bureaux", etage: "R+2", surface: null, site: "Paris", ref: "ESP-A213", contact: "" },
+  { id: 48, nom: "Bureau Michèle Lionnet", batiment: "Bât. A – Bureaux", etage: "R+2", surface: null, site: "Paris", ref: "ESP-A214", contact: "" },
+  { id: 49, nom: "Bureau Pauline Camus", batiment: "Bât. A – Bureaux", etage: "R+2", surface: null, site: "Paris", ref: "ESP-A215", contact: "" },
+  { id: 50, nom: "Bureau Aline Cointrel-Porcuzek", batiment: "Bât. A – Bureaux", etage: "R+2", surface: null, site: "Paris", ref: "ESP-A216", contact: "" },
+  { id: 51, nom: "Bureau Sportif", batiment: "Bât. A – Bureaux", etage: "R+2", surface: null, site: "Paris", ref: "ESP-A217", contact: "" },
+  { id: 52, nom: "Bureau de passage", batiment: "Bât. A – Bureaux", etage: "R+2", surface: null, site: "Paris", ref: "ESP-A218", contact: "" },
+  // Bât. A – R+3
+  { id: 53, nom: "Local stockage Sec.G &", batiment: "Bât. A – Bureaux", etage: "R+3", surface: null, site: "Paris", ref: "ESP-A301", contact: "" },
+  { id: 54, nom: "Kodomo", batiment: "Bât. A – Bureaux", etage: "R+3", surface: null, site: "Paris", ref: "", contact: "" },
+  { id: 55, nom: "Bureau Communication", batiment: "Bât. A – Bureaux", etage: "R+3", surface: null, site: "Paris", ref: "ESP-A302", contact: "" },
+  { id: 56, nom: "Bureau Astrid Boudry", batiment: "Bât. A – Bureaux", etage: "R+3", surface: null, site: "Paris", ref: "ESP-A303", contact: "" },
+  { id: 57, nom: "Bureau Sec. G & CNKDR", batiment: "Bât. A – Bureaux", etage: "R+3", surface: null, site: "Paris", ref: "ESP-A304", contact: "" },
+  { id: 58, nom: "Salle de réunion com", batiment: "Bât. A – Bureaux", etage: "R+3", surface: null, site: "Paris", ref: "ESP-A305", contact: "" },
+  { id: 59, nom: "Sanitaires Rotonde", batiment: "Bât. A – Bureaux", etage: "R+3", surface: null, site: "Paris", ref: "ESP-A306", contact: "" },
+  { id: 60, nom: "Bureau Magali Baton", batiment: "Bât. A – Bureaux", etage: "R+3", surface: null, site: "Paris", ref: "ESP-A307", contact: "" },
+  { id: 61, nom: "Bureau Edouard de Laforcade", batiment: "Bât. A – Bureaux", etage: "R+3", surface: null, site: "Paris", ref: "ESP-A308", contact: "" },
+  { id: 62, nom: "Bureau Juridique", batiment: "Bât. A – Bureaux", etage: "R+3", surface: null, site: "Paris", ref: "ESP-A309", contact: "" },
+  { id: 63, nom: "Bureau Lucile Perrotte", batiment: "Bât. A – Bureaux", etage: "R+3", surface: null, site: "Paris", ref: "ESP-A310", contact: "" },
+  { id: 64, nom: "Bureau Boutique Officielle", batiment: "Bât. A – Bureaux", etage: "R+3", surface: null, site: "Paris", ref: "ESP-A311", contact: "" },
+  { id: 65, nom: "Bureau Loïs Richerd", batiment: "Bât. A – Bureaux", etage: "R+3", surface: null, site: "Paris", ref: "ESP-A312", contact: "" },
+  { id: 66, nom: "Bureau Événementiel Privé", batiment: "Bât. A – Bureaux", etage: "R+3", surface: null, site: "Paris", ref: "ESP-A313", contact: "" },
+  { id: 67, nom: "Bureau Licences", batiment: "Bât. A – Bureaux", etage: "R+3", surface: null, site: "Paris", ref: "ESP-A314", contact: "" },
+  { id: 68, nom: "Bureau Informatique", batiment: "Bât. A – Bureaux", etage: "R+3", surface: null, site: "Paris", ref: "ESP-A315", contact: "" },
+  { id: 69, nom: "Bureau Sponsoring, Mécénat & RSE", batiment: "Bât. A – Bureaux", etage: "R+3", surface: null, site: "Paris", ref: "ESP-A316", contact: "" },
+  { id: 70, nom: "Bureau Événementiel Sportif", batiment: "Bât. A – Bureaux", etage: "R+3", surface: null, site: "Paris", ref: "ESP-A317", contact: "" },
+  { id: 71, nom: "Bureau Comptabilité", batiment: "Bât. A – Bureaux", etage: "R+3", surface: null, site: "Paris", ref: "ESP-A318", contact: "" },
+  { id: 72, nom: "Bureau Anthony Leflem", batiment: "Bât. A – Bureaux", etage: "R+3", surface: null, site: "Paris", ref: "ESP-A319", contact: "" },
+  { id: 73, nom: "Bureau Sophie Burguès", batiment: "Bât. A – Bureaux", etage: "R+3", surface: null, site: "Paris", ref: "ESP-A320", contact: "" },
+  { id: 74, nom: "Bureau Marianne Maréchal", batiment: "Bât. A – Bureaux", etage: "R+3", surface: null, site: "Paris", ref: "ESP-A321", contact: "" },
+  { id: 75, nom: "Bureau Sabrina Hamoumraoui", batiment: "Bât. A – Bureaux", etage: "R+3", surface: null, site: "Paris", ref: "ESP-A322", contact: "" },
+  { id: 76, nom: "Bureau RH & Paie", batiment: "Bât. A – Bureaux", etage: "R+3", surface: null, site: "Paris", ref: "ESP-A323", contact: "" },
+  { id: 77, nom: "Bureau Charlotte Pietri", batiment: "Bât. A – Bureaux", etage: "R+3", surface: null, site: "Paris", ref: "ESP-A324", contact: "" },
+  { id: 78, nom: "Salon Paris", batiment: "Bât. A – Bureaux", etage: "R+3", surface: null, site: "Paris", ref: "ESP-A325", contact: "" },
+  { id: 79, nom: "Sanitaires Hommes", batiment: "Bât. A – Bureaux", etage: "R+3", surface: null, site: "Paris", ref: "ESP-A326a", contact: "" },
+  { id: 80, nom: "Sanitaires Femmes", batiment: "Bât. A – Bureaux", etage: "R+3", surface: null, site: "Paris", ref: "ESP-A326b", contact: "" },
+  // Bât. B – Awazu
+  { id: 81, nom: "Dojo Awazu", batiment: "Bât. B – Awazu", etage: "R-1", surface: 2500, site: "Paris", ref: "ESP-BR101", contact: "Marie Dupont – 06 XX XX XX XX" },
+  { id: 82, nom: "Studio", batiment: "Bât. B – Awazu", etage: "R-1", surface: 800, site: "Paris", ref: "ESP-BR102", contact: "Marie Dupont – 06 XX XX XX XX" },
+  { id: 83, nom: "Cabinet kinésithérapie", batiment: "Bât. B – Awazu", etage: "R-1", surface: 120, site: "Paris", ref: "ESP-BR103", contact: "Marie Dupont – 06 XX XX XX XX" },
+  { id: 84, nom: "Vestiaires & Sanitaires", batiment: "Bât. B – Awazu", etage: "R-1", surface: 120, site: "Paris", ref: "ESP-BR104", contact: "Marie Dupont – 06 XX XX XX XX" },
+  { id: 85, nom: "Tribunes", batiment: "Bât. B – Awazu", etage: "R-1", surface: 600, site: "Paris", ref: "ESP-BR105", contact: "Marie Dupont – 06 XX XX XX XX" },
+  { id: 86, nom: "Local formation", batiment: "Bât. B – Awazu", etage: "R-1", surface: null, site: "Paris", ref: "ESP-BR106", contact: "" },
+  { id: 87, nom: "Local stockage - Awazu", batiment: "Bât. B – Awazu", etage: "R-1", surface: null, site: "Paris", ref: "ESP-BR107", contact: "" },
+  { id: 88, nom: "Salle de musculation", batiment: "Bât. B – Awazu", etage: "R-1", surface: null, site: "Paris", ref: "ESP-BR108", contact: "" },
+  { id: 89, nom: "Atelier", batiment: "Bât. B – Awazu", etage: "R-1", surface: null, site: "Paris", ref: "ESP-BR109", contact: "" },
+  { id: 90, nom: "Bureau Entraîneurs", batiment: "Bât. B – Awazu", etage: "R-1", surface: null, site: "Paris", ref: "ESP-BR109", contact: "" },
+  { id: 91, nom: "Archives", batiment: "Bât. B – Awazu", etage: "R-2", surface: null, site: "Paris", ref: "ESP-BR201", contact: "" },
+  { id: 92, nom: "Local Serveur", batiment: "Bât. B – Awazu", etage: "R-2", surface: null, site: "Paris", ref: "ESP-BR202", contact: "" },
+  { id: 93, nom: "Accueil Awazu", batiment: "Bât. B – Awazu", etage: "RDC", surface: null, site: "Paris", ref: "ESP-B001", contact: "" },
+  { id: 94, nom: "Cantine Dojo Academy", batiment: "Bât. B – Awazu", etage: "RDC", surface: null, site: "Paris", ref: "ESP-B002a", contact: "" },
+  { id: 95, nom: "Sanitaires - Cantine", batiment: "Bât. B – Awazu", etage: "RDC", surface: null, site: "Paris", ref: "ESP-B002b", contact: "" },
+  { id: 96, nom: "Pièce annexe - Cantine", batiment: "Bât. B – Awazu", etage: "RDC", surface: null, site: "Paris", ref: "ESP-B002c", contact: "" },
+  { id: 97, nom: "Local stockage - Cantine", batiment: "Bât. B – Awazu", etage: "RDC", surface: null, site: "Paris", ref: "ESP-B002d", contact: "" },
+  { id: 98, nom: "Salon - Appartement", batiment: "Bât. B – Awazu", etage: "R+1", surface: null, site: "Paris", ref: "ESP-B101", contact: "" },
+  { id: 99, nom: "Cuisine - Appartement", batiment: "Bât. B – Awazu", etage: "R+1", surface: null, site: "Paris", ref: "ESP-B102", contact: "" },
+  { id: 100, nom: "Chambre 1 - Appartement", batiment: "Bât. B – Awazu", etage: "R+1", surface: null, site: "Paris", ref: "ESP-B103", contact: "" },
+  { id: 101, nom: "Chambre 2 - Appartement", batiment: "Bât. B – Awazu", etage: "R+1", surface: null, site: "Paris", ref: "ESP-B104", contact: "" },
+  { id: 102, nom: "Chambre 3 - Appartement", batiment: "Bât. B – Awazu", etage: "R+1", surface: null, site: "Paris", ref: "ESP-B105", contact: "" },
+  { id: 103, nom: "Chambre 4 - Appartement", batiment: "Bât. B – Awazu", etage: "R+1", surface: null, site: "Paris", ref: "ESP-B106", contact: "" },
+  // Bât. C – Dojo de Paris
+  { id: 104, nom: "Hall d'accueil", batiment: "Bât. C - Dojo de Paris", etage: "RDC", surface: 50, site: "Paris", ref: "ESP-C001", contact: "Marie Dupont – 06 XX XX XX XX" },
+  { id: 105, nom: "Billetterie", batiment: "Bât. C - Dojo de Paris", etage: "RDC", surface: null, site: "Paris", ref: "ESP-C002", contact: "" },
+  { id: 106, nom: "PC Sécurité", batiment: "Bât. C - Dojo de Paris", etage: "RDC", surface: null, site: "Paris", ref: "ESP-C003", contact: "" },
+  { id: 107, nom: "Local stockage", batiment: "Bât. C - Dojo de Paris", etage: "RDC", surface: null, site: "Paris", ref: "ESP-C004", contact: "" },
+  { id: 108, nom: "Bureau Chef établissement", batiment: "Bât. C - Dojo de Paris", etage: "RDC", surface: null, site: "Paris", ref: "ESP-C005", contact: "" },
+  { id: 109, nom: "Sanitaires Hommes", batiment: "Bât. C - Dojo de Paris", etage: "RDC", surface: null, site: "Paris", ref: "ESP-C006a", contact: "" },
+  { id: 110, nom: "Sanitaires Femmes", batiment: "Bât. C - Dojo de Paris", etage: "RDC", surface: null, site: "Paris", ref: "ESP-C006b", contact: "" },
+  { id: 111, nom: "Vestiaires & Sanitaires - Entresol", batiment: "Bât. C - Dojo de Paris", etage: "Entresol", surface: null, site: "Paris", ref: "ESP-CE01", contact: "" },
+  { id: 112, nom: "Local stockage Boutique", batiment: "Bât. C - Dojo de Paris", etage: "Entresol", surface: null, site: "Paris", ref: "ESP-CE02", contact: "" },
+  { id: 113, nom: "Local ménage", batiment: "Bât. C - Dojo de Paris", etage: "Entresol", surface: null, site: "Paris", ref: "ESP-CE03", contact: "" },
+  { id: 114, nom: "Salle production", batiment: "Bât. C - Dojo de Paris", etage: "Entresol", surface: null, site: "Paris", ref: "ESP-CE04", contact: "" },
+  { id: 115, nom: "Vestiaires & Sanitaires", batiment: "Bât. C - Dojo de Paris", etage: "R-2", surface: null, site: "Paris", ref: "ESP-CR201", contact: "" },
+  { id: 116, nom: "Salle de réunion", batiment: "Bât. C - Dojo de Paris", etage: "R-2", surface: null, site: "Paris", ref: "ESP-CR202", contact: "" },
+  { id: 117, nom: "Salle de pesée", batiment: "Bât. C - Dojo de Paris", etage: "R-2", surface: null, site: "Paris", ref: "ESP-CR203", contact: "" },
+  { id: 118, nom: "Plateau principal", batiment: "Bât. C - Dojo de Paris", etage: "R-1", surface: null, site: "Paris", ref: "ESP-CR101", contact: "" },
+  { id: 119, nom: "Sanitaires", batiment: "Bât. C - Dojo de Paris", etage: "R-1", surface: null, site: "Paris", ref: "ESP-CR102", contact: "" },
+  { id: 120, nom: "Vestiaire entraîneurs", batiment: "Bât. C - Dojo de Paris", etage: "R-1", surface: null, site: "Paris", ref: "ESP-CR103", contact: "" },
+  { id: 121, nom: "Local CTA", batiment: "Bât. C - Dojo de Paris", etage: "R-1", surface: null, site: "Paris", ref: "ESP-CR104", contact: "" },
+  { id: 122, nom: "Local technique", batiment: "Bât. C - Dojo de Paris", etage: "R-1", surface: null, site: "Paris", ref: "ESP-CR105", contact: "" },
+  { id: 123, nom: "Local autolaveuse", batiment: "Bât. C - Dojo de Paris", etage: "R-1", surface: null, site: "Paris", ref: "ESP-CR106", contact: "" },
+  { id: 124, nom: "Machinerie ascenseur", batiment: "Bât. C - Dojo de Paris", etage: "R-1", surface: null, site: "Paris", ref: "ESP-CR107", contact: "" },
+  { id: 125, nom: "Local ménage", batiment: "Bât. C - Dojo de Paris", etage: "R-1", surface: null, site: "Paris", ref: "ESP-CR108", contact: "" },
+  { id: 126, nom: "Cuisine", batiment: "Bât. C - Dojo de Paris", etage: "R+1", surface: null, site: "Paris", ref: "ESP-C101", contact: "" },
+  { id: 127, nom: "Salle de restauration", batiment: "Bât. C - Dojo de Paris", etage: "R+1", surface: null, site: "Paris", ref: "ESP-C102", contact: "" },
+  { id: 128, nom: "Tribunes", batiment: "Bât. C - Dojo de Paris", etage: "R+1", surface: null, site: "Paris", ref: "ESP-C103", contact: "" },
+  { id: 129, nom: "Espace VIP", batiment: "Bât. C - Dojo de Paris", etage: "R+2", surface: null, site: "Paris", ref: "ESP-C201", contact: "" },
+  { id: 130, nom: "Régie", batiment: "Bât. C - Dojo de Paris", etage: "R+3", surface: null, site: "Paris", ref: "ESP-C301", contact: "" },
+  { id: 131, nom: "Stockage -3", batiment: "Bât. C - Dojo de Paris", etage: "R-3", surface: null, site: "Paris", ref: "ESP-CR301", contact: "" },
+  // Grand Dôme – Villebon
+  { id: 132, nom: "Hall d'entrée", batiment: "Grand Dôme", etage: "RDC", surface: 2800, site: "Villebon", ref: "ESP-V001", contact: "Jean Martin – 06 XX XX XX XX" },
+  { id: 133, nom: "Billetteries", batiment: "Grand Dôme", etage: "RDC", surface: 600, site: "Villebon", ref: "ESP-V002", contact: "Jean Martin – 06 XX XX XX XX" },
+  { id: 134, nom: "Bureau Privé", batiment: "Grand Dôme", etage: "RDC", surface: 120, site: "Villebon", ref: "ESP-V003a", contact: "Jean Martin – 06 XX XX XX XX" },
+  { id: 135, nom: "Bureau organisation", batiment: "Grand Dôme", etage: "RDC", surface: 120, site: "Villebon", ref: "ESP-V003b", contact: "Jean Martin – 06 XX XX XX XX" },
+  { id: 136, nom: "Salle de réunion", batiment: "Grand Dôme", etage: "RDC", surface: 50, site: "Villebon", ref: "ESP-V003c", contact: "Jean Martin – 06 XX XX XX XX" },
+  { id: 137, nom: "Salle de réunion", batiment: "Grand Dôme", etage: "RDC", surface: null, site: "Villebon", ref: "ESP-V004a", contact: "" },
+  { id: 138, nom: "Vestiaires - espace prod", batiment: "Grand Dôme", etage: "RDC", surface: null, site: "Villebon", ref: "ESP-V004b", contact: "" },
+  { id: 139, nom: "Espace stockage", batiment: "Grand Dôme", etage: "RDC", surface: null, site: "Villebon", ref: "ESP-V005", contact: "" },
+  { id: 140, nom: "Salle de restauration", batiment: "Grand Dôme", etage: "RDC", surface: null, site: "Villebon", ref: "ESP-V006a", contact: "" },
+  { id: 141, nom: "Cuisine", batiment: "Grand Dôme", etage: "RDC", surface: null, site: "Villebon", ref: "ESP-V006b", contact: "" },
+  { id: 142, nom: "Arrière-cuisine", batiment: "Grand Dôme", etage: "RDC", surface: null, site: "Villebon", ref: "ESP-V006c", contact: "" },
+  { id: 143, nom: "Espace stockage A", batiment: "Grand Dôme", etage: "RDC", surface: null, site: "Villebon", ref: "ESP-V007a", contact: "" },
+  { id: 144, nom: "Espace stockage B", batiment: "Grand Dôme", etage: "RDC", surface: null, site: "Villebon", ref: "ESP-V007b", contact: "" },
+  { id: 145, nom: "Vestiaires & sanitaires - sportif", batiment: "Grand Dôme", etage: "RDC", surface: null, site: "Villebon", ref: "ESP-V008", contact: "" },
+  { id: 146, nom: "PC Sécurité", batiment: "Grand Dôme", etage: "RDC", surface: null, site: "Villebon", ref: "ESP-V009", contact: "" },
+  { id: 147, nom: "Espace médical principal", batiment: "Grand Dôme", etage: "RDC", surface: null, site: "Villebon", ref: "ESP-V010a", contact: "" },
+  { id: 148, nom: "Espace médical annexe", batiment: "Grand Dôme", etage: "RDC", surface: null, site: "Villebon", ref: "ESP-V010b", contact: "" },
+  { id: 149, nom: "Espace VIP", batiment: "Grand Dôme", etage: "RDC", surface: null, site: "Villebon", ref: "ESP-V011", contact: "" },
+  { id: 150, nom: "Sanitaires publics - buvette", batiment: "Grand Dôme", etage: "R+1", surface: null, site: "Villebon", ref: "ESP-V112a", contact: "" },
+  { id: 151, nom: "Sanitaires publics - écran", batiment: "Grand Dôme", etage: "R+1", surface: null, site: "Villebon", ref: "ESP-V112b", contact: "" },
+  { id: 152, nom: "Coursive R+1", batiment: "Grand Dôme", etage: "R+1", surface: null, site: "Villebon", ref: "ESP-V113", contact: "" },
+  { id: 153, nom: "Tribunes", batiment: "Grand Dôme", etage: "R+1", surface: null, site: "Villebon", ref: "ESP-V114", contact: "" },
+  { id: 154, nom: "Plateau principal", batiment: "Grand Dôme", etage: "R+1", surface: null, site: "Villebon", ref: "ESP-V115", contact: "" },
+  { id: 155, nom: "Régie", batiment: "Grand Dôme", etage: "R+2", surface: null, site: "Villebon", ref: "ESP-V216", contact: "" },
+  { id: 156, nom: "Espaces verts", batiment: "Grand Dôme", etage: "Extérieur", surface: null, site: "Villebon", ref: "", contact: "" },
+  { id: 157, nom: "Parking", batiment: "Grand Dôme", etage: "Extérieur", surface: null, site: "Villebon", ref: "", contact: "" },
+  { id: 158, nom: "Grand Dôme de Villebon", batiment: "Grand Dôme", etage: "", surface: null, site: "Villebon", ref: "", contact: "" },
+  { id: 159, nom: "Dojo de Paris", batiment: "Bât. C - Dojo de Paris", etage: "", surface: null, site: "Paris", ref: "", contact: "" },
 ];
 
 const PRESTATAIRES_DATA = [
-  { id: 1, nom: "IPSI", specialite: "SSI / Désenfumage", contact: "", email: "", tel: "", finContrat: "" },
-  { id: 2, nom: "Schindler", specialite: "Ascenseurs", contact: "", email: "", tel: "", finContrat: "2026-06-30" },
-  { id: 3, nom: "Engie Cofely", specialite: "CVC / GTB", contact: "", email: "", tel: "", finContrat: "2025-09-30" },
+  { id: 1, nom: "Adere", specialite: "Réseau", contact: "", email: "", tel: "", finContrat: "" },
+  { id: 2, nom: "Arkonia", specialite: "Tous travaux", contact: "Jérémy Granger", email: "contact@arkonia.fr", tel: "06 36 48 36 71", finContrat: "" },
+  { id: 3, nom: "Atalian Maintenance & Energy", specialite: "Maintenance GTB/CVC", contact: "Romain Milia", email: "", tel: "", finContrat: "" },
+  { id: 4, nom: "CS+", specialite: "Manutention gros volumes - signalétique - transport", contact: "Tony Persehais", email: "tony.persehais@cs-plus.fr", tel: "06 46 30 92 21", finContrat: "" },
+  { id: 5, nom: "DOUVENEAU", specialite: "Plomberie – chauffage", contact: "A Douveneau", email: "adouveaneau@gmail.com", tel: "06 32 67 44 61", finContrat: "" },
+  { id: 6, nom: "Électricité ?", specialite: "Électricité – tableaux – mise en conformité", contact: "Karim Benali", email: "k.benali@egif.fr", tel: "06 XX XX XX XX", finContrat: "2025-06-30", nMarche: "ELEC-2023-007" },
+  { id: 7, nom: "ETS - En toute sécurité", specialite: "Sécurité - surveillance", contact: "", email: "", tel: "", finContrat: "" },
+  { id: 8, nom: "Green Recup", specialite: "Collecte déchets", contact: "-", email: "", tel: "01 48 03 26 78", finContrat: "", nMarche: "B50100 DOP / B05010 SIE" },
+  { id: 9, nom: "GRP", specialite: "Nettoyage industriel – entretien", contact: "Sophie Blanc", email: "s.blanc@nps.fr", tel: "01 XX XX XX XX", finContrat: "2025-09-30", nMarche: "NPS-2022-008" },
+  { id: 10, nom: "IPSI", specialite: "Sécurité incendie – extincteurs – BAES", contact: "Pierre Lemaire", email: "p.lemaire@sfif.fr", tel: "01 XX XX XX XX", finContrat: "2025-12-31", nMarche: "SFIF-2022-001" },
+  { id: 11, nom: "Ledkia", specialite: "Fourniture lumière", contact: "", email: "", tel: "", finContrat: "" },
+  { id: 12, nom: "Magnum", specialite: "Sonorisation – audiovisuel – scénique", contact: "Gaetan", email: "f.dubois@sonoevent.fr", tel: "06 XX XX XX XX", finContrat: "2025-01-31", nMarche: "SEP-2023-002" },
+  { id: 13, nom: "OTIS", specialite: "Ascenseurs – maintenance réglementaire", contact: "Service client", email: "contrats@tkelevator.fr", tel: "0800 XX XX XX", finContrat: "2026-03-31", nMarche: "TKE-2021-045" },
+  { id: 14, nom: "Powesco", specialite: "CVC – climatisation – chauffage", contact: "Nathalie Roy", email: "n.roy@climasud.fr", tel: "06 XX XX XX XX", finContrat: "2024-12-31", nMarche: "CLIM-2020-012" },
+  { id: 15, nom: "Secure IP", specialite: "Contrôle d'accès – interphonie – portails", contact: "David Chen", email: "d.chen@acp.fr", tel: "01 XX XX XX XX", finContrat: "2024-09-30", nMarche: "ACP-2021-003" },
+  { id: 16, nom: "SOCOTEC", specialite: "", contact: "", email: "", tel: "", finContrat: "" },
+  { id: 17, nom: "Starnet Multiservices", specialite: "Nettoyage", contact: "Ricardo", email: "starnetmultiservices@outlook.com", tel: "06 13 96 35 35", finContrat: "2025-12-31", nMarche: "aucun" },
+  { id: 18, nom: "Michael Argot", specialite: "Technicien polyvalent", contact: "", email: "michael.argot@ffjudo.com", tel: "", finContrat: "" },
 ];
 
 const RESERVATIONS_INIT = [
@@ -78,6 +288,7 @@ const MAINTENANCES_INIT = [
   { id: 3, equipement: "Groupe électrogène", type: "Préventif", planifiee: "2025-07-01", prestataire: "Engie Cofely", statut: "Terminée", priorite: "Normale", description: "", userId: 1 },
 ];
 
+// ─── COMPOSANTS UI ────────────────────────────────────────────────────────────
 const Badge = ({ label, color }) => {
   const c = { success: ["#dcfce7","#16a34a"], warning: ["#fef9c3","#b45309"], danger: ["#fee2e2","#dc2626"], info: ["#dbeafe","#1d4ed8"], muted: ["#f3f4f6","#6b7280"], orange: ["#ffedd5","#c2410c"] }[color] || ["#f3f4f6","#6b7280"];
   return <span style={{ background: c[0], color: c[1], padding: "2px 10px", borderRadius: 20, fontSize: 12, fontWeight: 600 }}>{label}</span>;
@@ -97,9 +308,10 @@ const btnP = { background: COLORS.primary, color: "#fff", border: "none", border
 const btnG = { background: "#e5e7eb", color: "#374151", border: "none", borderRadius: 8, padding: "9px 20px", cursor: "pointer", fontWeight: 600, fontSize: 14 };
 const btnS = { background: COLORS.success, color: "#fff", border: "none", borderRadius: 8, padding: "6px 12px", cursor: "pointer", fontWeight: 600, fontSize: 13 };
 const btnD = { background: COLORS.danger, color: "#fff", border: "none", borderRadius: 8, padding: "6px 12px", cursor: "pointer", fontWeight: 600, fontSize: 13 };
+
 const fmtDate = (dt) => { if (!dt) return ""; const [d, t] = dt.split("T"); return t ? `${d} à ${t}` : d; };
 
-const LOGO_URL = "/logo-france-judo.png";
+// ─── PAGE LOGIN ───────────────────────────────────────────────────────────────
 const LoginPage = ({ onLogin }) => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -118,9 +330,10 @@ const LoginPage = ({ onLogin }) => {
   return (
     <div style={{ minHeight: "100vh", background: `linear-gradient(135deg, ${COLORS.primary} 0%, #001a4d 100%)`, display: "flex", alignItems: "center", justifyContent: "center", padding: 16 }}>
       <div style={{ background: "#fff", borderRadius: 20, padding: 40, width: "100%", maxWidth: 400, boxShadow: "0 20px 60px rgba(0,0,0,0.3)" }}>
+        {/* Logo */}
         <div style={{ textAlign: "center", marginBottom: 32 }}>
           <div style={{ display: "inline-flex", alignItems: "center", justifyContent: "center", background: "#fff", border: `1px solid ${COLORS.border}`, borderRadius: 16, width: 120, height: 72, marginBottom: 12, padding: 8 }}>
-            <img src={LOGO_URL} alt="France Judo" style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain" }} />
+            <img src="https://upload.wikimedia.org/wikipedia/fr/thumb/7/7b/Logo_France_Judo_2021.svg/1200px-Logo_France_Judo_2021.svg.png" alt="France Judo" style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain" }} />
           </div>
           <div style={{ fontWeight: 800, fontSize: 20, color: COLORS.primary }}>Services Généraux</div>
           <div style={{ fontSize: 13, color: COLORS.muted, marginTop: 2 }}>France Judo</div>
@@ -151,6 +364,7 @@ const LoginPage = ({ onLogin }) => {
   );
 };
 
+// ─── MODAL VALIDATION ─────────────────────────────────────────────────────────
 const ModalValidation = ({ reservation, action, onConfirm, onClose }) => {
   const [comment, setComment] = useState("");
   return (
@@ -167,7 +381,7 @@ const ModalValidation = ({ reservation, action, onConfirm, onClose }) => {
         </label>
         <textarea value={comment} onChange={e => setComment(e.target.value)}
           style={{ ...inp, marginTop: 6, minHeight: 90, resize: "vertical" }}
-          placeholder={action === "valider" ? "Ex : Récupération à l'accueil RDC, contacter Lucile." : "Ex : Matériel déjà réservé sur cette période."} />
+          placeholder={action === "valider" ? "Ex : Récupération à l'accueil RDC, contacter Lucile au 01 XX XX XX XX." : "Ex : Matériel déjà réservé sur cette période."} />
         <div style={{ display: "flex", gap: 10, marginTop: 16 }}>
           <button style={action === "valider" ? btnS : btnD} onClick={() => onConfirm(comment)}>
             {action === "valider" ? "Confirmer la validation" : "Confirmer le refus"}
@@ -179,6 +393,7 @@ const ModalValidation = ({ reservation, action, onConfirm, onClose }) => {
   );
 };
 
+// ─── FORMULAIRE RÉSERVATION ───────────────────────────────────────────────────
 const FormulaireReservation = ({ currentUser, onSubmit, onClose }) => {
   const [evenement, setEvenement] = useState("");
   const [autreEvt, setAutreEvt] = useState("");
@@ -291,6 +506,7 @@ const FormulaireReservation = ({ currentUser, onSubmit, onClose }) => {
   );
 };
 
+// ─── APP PRINCIPALE ───────────────────────────────────────────────────────────
 export default function App() {
   const [currentUser, setCurrentUser] = useState(null);
   const [tab, setTab] = useState("dashboard");
@@ -305,6 +521,7 @@ export default function App() {
   if (!currentUser) return <LoginPage onLogin={(u) => { setCurrentUser(u); setTab(u.role === "Utilisateur" ? "reservations" : "dashboard"); }} />;
 
   const isAdmin = currentUser.role === "Admin";
+  const isTech = currentUser.role === "Technicien";
   const isUser = currentUser.role === "Utilisateur";
 
   const TABS = isUser
@@ -334,6 +551,110 @@ export default function App() {
   const reservationsVues = isUser ? reservations.filter(r => r.userId === currentUser.id) : reservations;
   const maintenancesVues = isUser ? maintenances.filter(m => m.userId === currentUser.id) : maintenances;
   const filteredEq = EQUIPEMENTS_DATA.filter(e => e.nom.toLowerCase().includes(searchEq.toLowerCase()));
+
+  const EspacesView = () => {
+    const [vue, setVue] = useState("liste");
+    const [searchEsp, setSearchEsp] = useState("");
+    const [filterBat, setFilterBat] = useState("Tous");
+    const batiments = ["Tous", ...Array.from(new Set(ESPACES_DATA.map(e => e.batiment))).filter(Boolean)];
+    const filtered = ESPACES_DATA.filter(e =>
+      (filterBat === "Tous" || e.batiment === filterBat) &&
+      e.nom.toLowerCase().includes(searchEsp.toLowerCase())
+    );
+    const parBatiment = batiments.filter(b => b !== "Tous").map(bat => ({
+      bat,
+      espaces: ESPACES_DATA.filter(e => e.batiment === bat),
+      site: ESPACES_DATA.find(e => e.batiment === bat)?.site || "",
+    }));
+
+    return (
+      <div>
+        <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16, flexWrap: "wrap", gap: 12 }}>
+          <h2 style={{ margin: 0, color: COLORS.primary }}>Espaces & bâtiments <span style={{ fontSize: 14, color: COLORS.muted, fontWeight: 400 }}>({ESPACES_DATA.length} espaces)</span></h2>
+          <div style={{ display: "flex", gap: 8 }}>
+            <button onClick={() => setVue("liste")} style={{ ...btnP, background: vue === "liste" ? COLORS.primary : "#e5e7eb", color: vue === "liste" ? "#fff" : COLORS.text, padding: "7px 16px", fontSize: 13 }}>📋 Liste</button>
+            <button onClick={() => setVue("batiment")} style={{ ...btnP, background: vue === "batiment" ? COLORS.primary : "#e5e7eb", color: vue === "batiment" ? "#fff" : COLORS.text, padding: "7px 16px", fontSize: 13 }}>🏢 Par bâtiment</button>
+          </div>
+        </div>
+
+        {vue === "liste" && (
+          <>
+            <div style={{ display: "flex", gap: 12, marginBottom: 16, flexWrap: "wrap" }}>
+              <input style={{ ...inp, width: 260 }} placeholder="🔍 Rechercher un espace…" value={searchEsp} onChange={e => setSearchEsp(e.target.value)} />
+              <select style={{ ...inp, width: 220 }} value={filterBat} onChange={e => setFilterBat(e.target.value)}>
+                {batiments.map(b => <option key={b}>{b}</option>)}
+              </select>
+            </div>
+            <Card>
+              <div style={{ overflowX: "auto" }}>
+                <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 13 }}>
+                  <thead>
+                    <tr style={{ background: COLORS.light }}>
+                      {["Nom", "Bâtiment", "Site", "Étage", "Surface", "Référence", "Contact", "Actions"].map(h => (
+                        <th key={h} style={{ padding: "9px 12px", textAlign: "left", fontWeight: 600, color: COLORS.muted, fontSize: 12, whiteSpace: "nowrap" }}>{h}</th>
+                      ))}
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {filtered.map(e => (
+                      <tr key={e.id} style={{ borderBottom: `1px solid ${COLORS.border}` }}>
+                        <td style={{ padding: "10px 12px", fontWeight: 500 }}>{e.nom}</td>
+                        <td style={{ padding: "10px 12px", fontSize: 12, color: COLORS.muted }}>{e.batiment}</td>
+                        <td style={{ padding: "10px 12px", fontSize: 12 }}>{e.site}</td>
+                        <td style={{ padding: "10px 12px", fontSize: 12 }}>{e.etage}</td>
+                        <td style={{ padding: "10px 12px", fontSize: 12 }}>{e.surface ? `${e.surface} m²` : "—"}</td>
+                        <td style={{ padding: "10px 12px", fontSize: 11, color: COLORS.muted }}>{e.ref || "—"}</td>
+                        <td style={{ padding: "10px 12px", fontSize: 11, color: COLORS.muted }}>{e.contact || "—"}</td>
+                        <td style={{ padding: "10px 12px" }}>
+                          <div style={{ display: "flex", gap: 4 }}>
+                            <button style={{ ...btnG, fontSize: 11, padding: "3px 8px" }}>📷</button>
+                            <button style={{ ...btnG, fontSize: 11, padding: "3px 8px" }}>🔧</button>
+                          </div>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <div style={{ padding: "10px 12px", fontSize: 12, color: COLORS.muted, borderTop: `1px solid ${COLORS.border}` }}>
+                {filtered.length} espace(s) affiché(s)
+              </div>
+            </Card>
+          </>
+        )}
+
+        {vue === "batiment" && (
+          <div style={{ display: "flex", flexDirection: "column", gap: 20 }}>
+            {parBatiment.map(({ bat, espaces, site }) => (
+              <Card key={bat}>
+                <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 12 }}>
+                  <div>
+                    <div style={{ fontWeight: 700, fontSize: 16, color: COLORS.primary }}>{bat}</div>
+                    <div style={{ fontSize: 12, color: COLORS.muted }}>{site} · {espaces.length} espace(s)</div>
+                  </div>
+                  <Badge label={site} color="info" />
+                </div>
+                <div style={{ display: "flex", flexWrap: "wrap", gap: 6 }}>
+                  {Array.from(new Set(espaces.map(e => e.etage))).filter(Boolean).sort().map(etage => (
+                    <div key={etage} style={{ flex: "0 0 auto", minWidth: 200 }}>
+                      <div style={{ fontSize: 11, fontWeight: 700, color: COLORS.muted, marginBottom: 4, textTransform: "uppercase" }}>Étage {etage}</div>
+                      {espaces.filter(e => e.etage === etage).map(e => (
+                        <div key={e.id} style={{ fontSize: 12, padding: "4px 8px", background: COLORS.light, borderRadius: 6, marginBottom: 3, display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+                          <span>{e.nom}</span>
+                          {e.surface && <span style={{ color: COLORS.muted, fontSize: 11 }}>{e.surface} m²</span>}
+                        </div>
+                      ))}
+                    </div>
+                  ))}
+                </div>
+              </Card>
+            ))}
+          </div>
+        )}
+      </div>
+    );
+  };
+
   const roleColor = { Admin: COLORS.accent, Technicien: "#7c3aed", Utilisateur: COLORS.success }[currentUser.role] || COLORS.muted;
   const roleIcon = { Admin: "👑", Technicien: "🔧", Utilisateur: "👤" }[currentUser.role];
 
@@ -342,9 +663,10 @@ export default function App() {
       {modal && <ModalValidation reservation={modal.reservation} action={modal.action} onConfirm={handleConfirm} onClose={() => setModal(null)} />}
       {showReservForm && <FormulaireReservation currentUser={currentUser} onSubmit={(d) => { setReservations(r => [...r, { ...d, id: r.length + 1 }]); setShowReservForm(false); }} onClose={() => setShowReservForm(false)} />}
 
+      {/* Header */}
       <div style={{ background: COLORS.primary, padding: "0 24px", display: "flex", alignItems: "center", gap: 12, height: 56 }}>
         <div style={{ background: "#fff", borderRadius: 8, width: 44, height: 34, display: "flex", alignItems: "center", justifyContent: "center", padding: "2px 4px" }}>
-          <img src={LOGO_URL} alt="France Judo" style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain" }} />
+          <img src="https://upload.wikimedia.org/wikipedia/fr/thumb/7/7b/Logo_France_Judo_2021.svg/1200px-Logo_France_Judo_2021.svg.png" alt="France Judo" style={{ maxWidth: "100%", maxHeight: "100%", objectFit: "contain" }} />
         </div>
         <span style={{ color: "#fff", fontWeight: 700, fontSize: 15 }}>Services Généraux — France Judo</span>
         <div style={{ flex: 1 }} />
@@ -363,6 +685,7 @@ export default function App() {
         </div>
       </div>
 
+      {/* Nav */}
       <div style={{ background: COLORS.white, borderBottom: `1px solid ${COLORS.border}`, padding: "0 24px", display: "flex", gap: 2, overflowX: "auto" }}>
         {TABS.map(t => (
           <button key={t.id} onClick={() => setTab(t.id)} style={{ background: "none", border: "none", cursor: "pointer", padding: "14px 16px", fontSize: 13, fontWeight: tab === t.id ? 700 : 500, color: tab === t.id ? COLORS.primary : COLORS.muted, borderBottom: tab === t.id ? `3px solid ${COLORS.primary}` : "3px solid transparent", whiteSpace: "nowrap" }}>{t.label}</button>
@@ -371,6 +694,7 @@ export default function App() {
 
       <div style={{ padding: 24, maxWidth: 1200, margin: "0 auto" }}>
 
+        {/* DASHBOARD */}
         {tab === "dashboard" && !isUser && (
           <div>
             <h2 style={{ marginBottom: 20, color: COLORS.primary }}>Tableau de bord</h2>
@@ -415,6 +739,7 @@ export default function App() {
           </div>
         )}
 
+        {/* RÉSERVATIONS */}
         {tab === "reservations" && (
           <div>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 }}>
@@ -464,12 +789,13 @@ export default function App() {
           </div>
         )}
 
+        {/* MATÉRIEL */}
         {tab === "materiel" && !isUser && (
           <div>
             <h2 style={{ marginBottom: 20, color: COLORS.primary }}>Catalogue matériel</h2>
             {Object.entries(MATERIEL_PAR_CAT).map(([cat, items]) => (
               <div key={cat} style={{ marginBottom: 24 }}>
-                <h3 style={{ margin: "0 0 12px", fontSize: 15 }}>{cat}</h3>
+                <h3 style={{ margin: "0 0 12px", fontSize: 15, color: COLORS.text }}>{cat}</h3>
                 <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(210px, 1fr))", gap: 12 }}>
                   {items.map(m => (
                     <Card key={m.id}>
@@ -486,6 +812,7 @@ export default function App() {
           </div>
         )}
 
+        {/* ÉQUIPEMENTS */}
         {tab === "equipements" && !isUser && (
           <div>
             <h2 style={{ marginBottom: 16, color: COLORS.primary }}>Équipements</h2>
@@ -495,7 +822,7 @@ export default function App() {
                 <table style={{ width: "100%", borderCollapse: "collapse", fontSize: 14 }}>
                   <thead>
                     <tr style={{ background: COLORS.light }}>
-                      {["Équipement","Catégorie","Bâtiment","Espace","N° série","État","Préventif","Fin garantie","Prestataire"].map(h => (
+                      {["Équipement", "Catégorie", "Bâtiment", "Espace", "N° série", "État", "Préventif", "Fin garantie", "Prestataire"].map(h => (
                         <th key={h} style={{ padding: "10px 12px", textAlign: "left", fontWeight: 600, color: COLORS.muted, fontSize: 12, whiteSpace: "nowrap" }}>{h}</th>
                       ))}
                     </tr>
@@ -521,34 +848,12 @@ export default function App() {
           </div>
         )}
 
+        {/* ESPACES */}
         {tab === "espaces" && !isUser && (
-          <div>
-            <h2 style={{ marginBottom: 20, color: COLORS.primary }}>Espaces & bâtiments</h2>
-            <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(240px, 1fr))", gap: 16 }}>
-              {ESPACES_DATA.map(e => (
-                <Card key={e.id}>
-                  <div style={{ fontWeight: 700, fontSize: 15 }}>{e.nom}</div>
-                  <div style={{ fontSize: 12, color: COLORS.muted, marginBottom: 12 }}>{e.batiment} · {e.site} · Réf. {e.ref}</div>
-                  <div style={{ display: "flex", gap: 8, marginBottom: 12 }}>
-                    <div style={{ background: COLORS.light, borderRadius: 8, padding: "6px 12px", flex: 1, textAlign: "center" }}>
-                      <div style={{ fontSize: 20, fontWeight: 800, color: COLORS.primary }}>{e.surface}</div>
-                      <div style={{ fontSize: 11, color: COLORS.muted }}>m²</div>
-                    </div>
-                    <div style={{ background: COLORS.light, borderRadius: 8, padding: "6px 12px", flex: 1, textAlign: "center" }}>
-                      <div style={{ fontSize: 20, fontWeight: 800, color: COLORS.primary }}>{e.etage}</div>
-                      <div style={{ fontSize: 11, color: COLORS.muted }}>Étage</div>
-                    </div>
-                  </div>
-                  <div style={{ display: "flex", gap: 6 }}>
-                    <button style={{ ...btnG, fontSize: 12, padding: "5px 10px", flex: 1 }}>📷 Photos</button>
-                    <button style={{ ...btnG, fontSize: 12, padding: "5px 10px", flex: 1 }}>🔧 Interventions</button>
-                  </div>
-                </Card>
-              ))}
-            </div>
-          </div>
+          <EspacesView />
         )}
 
+        {/* MAINTENANCE */}
         {tab === "maintenance" && (
           <div>
             <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 20 }}>
@@ -594,7 +899,7 @@ export default function App() {
                     <input type="date" style={{ ...inp, marginTop: 4 }} value={newMaint.planifiee} onChange={e => setNewMaint({ ...newMaint, planifiee: e.target.value })} />
                   </div>
                   <div style={{ gridColumn: "1 / -1" }}>
-                    <label style={{ fontSize: 13, fontWeight: 600 }}>Description</label>
+                    <label style={{ fontSize: 13, fontWeight: 600 }}>Description du problème</label>
                     <textarea style={{ ...inp, marginTop: 4, minHeight: 70, resize: "vertical" }} placeholder="Décrivez ce que vous observez…" value={newMaint.description} onChange={e => setNewMaint({ ...newMaint, description: e.target.value })} />
                   </div>
                 </div>
@@ -615,7 +920,7 @@ export default function App() {
                       {m.priorite === "Urgente" && <Badge label="🔴 Urgent" color="danger" />}
                     </div>
                     <div style={{ fontSize: 13, color: COLORS.muted }}>{m.type}{m.prestataire ? ` · ${m.prestataire}` : ""}</div>
-                    {m.description && <div style={{ fontSize: 13, marginTop: 6, fontStyle: "italic" }}>{m.description}</div>}
+                    {m.description && <div style={{ fontSize: 13, marginTop: 6, fontStyle: "italic", color: COLORS.text }}>{m.description}</div>}
                     <div style={{ fontSize: 13, marginTop: 6 }}>📅 {m.planifiee}</div>
                     <div style={{ marginTop: 10 }}>{sBadge(m.statut)}</div>
                   </Card>
@@ -625,6 +930,7 @@ export default function App() {
           </div>
         )}
 
+        {/* PRESTATAIRES */}
         {tab === "prestataires" && !isUser && (
           <div>
             <h2 style={{ marginBottom: 20, color: COLORS.primary }}>Prestataires & intervenants</h2>
