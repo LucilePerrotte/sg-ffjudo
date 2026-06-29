@@ -35,7 +35,6 @@ const COLORS = {
 };
 
 const USERS_DB = [
-  {const USERS_DB = [
   { id: "1", nom: "Lucile Perrotte", prenom: "Lucile", email: "lucile.perrotte@ffjudo.com", role: "Admin", password: "sg2025" },
   { id: "2", nom: "Michael Argot", prenom: "Michael", email: "michael.argot@ffjudo.com", role: "Technicien", password: "tech2025" },
   { id: "3", nom: "Jacob Adjovi", prenom: "Jacob", email: "jacob.adjovi@ffjudo.com", role: "Utilisateur", password: "2026" },
@@ -51,10 +50,10 @@ const USERS_DB = [
   { id: "13", nom: "Ihssen Ben Aicha", prenom: "Ihssen", email: "ihssen.nemri@ffjudo.com", role: "Utilisateur", password: "2026" },
   { id: "14", nom: "Leïla Benaboud", prenom: "Leïla", email: "leila.benaboud@ffjudo.com", role: "Utilisateur", password: "2026" },
   { id: "15", nom: "Fabien Bonal", prenom: "Fabien", email: "fabien.bonal@ffjudo.com", role: "Utilisateur", password: "2026" },
-  { id: "16", nom: "Pénélope Bonna", prenom: "Pénélope", email: "penelope.bonna@gmail.com", role: "Utilisateur", password: "2026" },
+  { id: "16", nom: "Pénélope Bonna", prenom: "Pénélope", email: "penelope.bonna@ffjudo.com", role: "Utilisateur", password: "2026" },
   { id: "17", nom: "Astrid Boudry", prenom: "Astrid", email: "astrid.boudry@ffjudo.com", role: "Utilisateur", password: "2026" },
   { id: "18", nom: "Inès Bouheben", prenom: "Inès", email: "ines.bouheben@ffjudo.com", role: "Utilisateur", password: "2026" },
-  { id: "19", nom: "Boris Bourgogne", prenom: "Boris", email: "bourgogne.boris@gmail.com", role: "Utilisateur", password: "2026" },
+  { id: "19", nom: "Boris Bourgogne", prenom: "Boris", email: "boris.bourgogne@ffjudo.com", role: "Utilisateur", password: "2026" },
   { id: "20", nom: "Pascal Bourouma", prenom: "Pascal", email: "pascal.bourouma@ffjudo.com", role: "Utilisateur", password: "2026" },
   { id: "21", nom: "Jean-Luc Bouvier", prenom: "Jean-Luc", email: "jl.bouvier@ffjudo.com", role: "Utilisateur", password: "2026" },
   { id: "22", nom: "Christophe Brunet", prenom: "Christophe", email: "christophe.brunet@ffjudo.com", role: "Utilisateur", password: "2026" },
@@ -101,7 +100,7 @@ const USERS_DB = [
   { id: "63", nom: "Jérémie Hourcan", prenom: "Jérémie", email: "jeremie.hourcan@ffjudo.com", role: "Utilisateur", password: "2026" },
   { id: "64", nom: "Franck Housset", prenom: "Franck", email: "franck.housset@ffjudo.com", role: "Utilisateur", password: "2026" },
   { id: "65", nom: "Automne Iddir Pavia", prenom: "Automne", email: "automne.pavia@ffjudo.com", role: "Utilisateur", password: "2026" },
-  { id: "66", nom: "Inès Infray", prenom: "Inès", email: "infray.ines@gmail.com", role: "Utilisateur", password: "2026" },
+  { id: "66", nom: "Inès Infray", prenom: "Inès", email: "ines.infray@ffjudo.com", role: "Utilisateur", password: "2026" },
   { id: "67", nom: "Arriles Issaad", prenom: "Arriles", email: "arriles.issaad@ffjudo.com", role: "Utilisateur", password: "2026" },
   { id: "68", nom: "Maëlle Jarmuzek", prenom: "Maëlle", email: "maelle.jarmuzek@ffjudo.com", role: "Utilisateur", password: "2026" },
   { id: "69", nom: "Benoit Joaquim", prenom: "Benoit", email: "benoit.joaquim@ffjudo.com", role: "Utilisateur", password: "2026" },
@@ -146,7 +145,7 @@ const USERS_DB = [
   { id: "108", nom: "Aurélie Rostaing", prenom: "Aurélie", email: "aurelie.rostaing@ffjudo.com", role: "Utilisateur", password: "2026" },
   { id: "109", nom: "Frédéric Roualen", prenom: "Frédéric", email: "frederic.roualen@ffjudo.com", role: "Utilisateur", password: "2026" },
   { id: "110", nom: "Clémence Rouyer", prenom: "Clémence", email: "clemence.rouyer@ffjudo.com", role: "Utilisateur", password: "2026" },
-  { id: "111", nom: "Jean-Baptiste Saelens", prenom: "Jean-Baptiste", email: "jb.saelens@gmail.com", role: "Utilisateur", password: "2026" },
+  { id: "111", nom: "Jean-Baptiste Saelens", prenom: "Jean-Baptiste", email: "jean-baptiste.saelens@ffjudo.com", role: "Utilisateur", password: "2026" },
   { id: "112", nom: "Shaïnès Sagna", prenom: "Shaïnès", email: "shaines.sagna@ffjudo.com", role: "Utilisateur", password: "2026" },
   { id: "113", nom: "Perrine Saint Etienne", prenom: "Perrine", email: "perrine.saintetienne@ffjudo.com", role: "Utilisateur", password: "2026" },
   { id: "114", nom: "Arnaud Seguin", prenom: "Arnaud", email: "arnaud.seguin@ffjudo.com", role: "Utilisateur", password: "2026" },
@@ -157,7 +156,6 @@ const USERS_DB = [
   { id: "119", nom: "Nikita Vieira", prenom: "Nikita", email: "nikita.vieira@ffjudo.com", role: "Utilisateur", password: "2026" },
   { id: "120", nom: "Pedro Xisto", prenom: "Pedro", email: "pedro.xisto@ffjudo.com", role: "Utilisateur", password: "2026" },
   { id: "121", nom: "Alevtina Ziacas", prenom: "Alevtina", email: "alevtina.ziacas@ffjudo.com", role: "Utilisateur", password: "2026" },
-];},
 ];
 
 const EVENEMENTS_CATALOGUE = [
