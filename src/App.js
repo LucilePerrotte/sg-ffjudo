@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
-const SUPABASE_URL = "https://gubzyphacaeriuxifkqy.supabase.co";
-const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd1Ynp5cGhhY2Flcml1eGlma3F5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI3OTY0NDYsImV4cCI6MjA5ODM3MjQ0Nn0.xvGZl2rrAJpk__jWni8i43-gNQrieadmk68qUy8OTEI";
+const SUPABASE_URL = "https://ljwqdsoqwwqetlqmoyks.supabase.co";
+const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxqd3Fkc29nd3dxZXRscW1veWtzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI3NDAxMjEsImV4cCI6MjA5ODMxNjEyMX0.Z-ZQD87GQvxLTIzb1GPzeDG7sCI55sXZfVzaVh39wvU";
 
 const db = {
   async get(table, filters = {}) {
@@ -300,11 +300,10 @@ const Badge = ({ label, color }) => {
   return <span style={{ background: c[0], color: c[1], padding: "2px 10px", borderRadius: 20, fontSize: 12, fontWeight: 600 }}>{label}</span>;
 };
 const sBadge = (s) => {
-  if (["Validée","Terminée","Bon"].includes(s)) return <Badge label={s} color="success" />;
+  if (["Validée","Terminée","Bon","Rendue"].includes(s)) return <Badge label={s} color="success" />;
   if (["En attente","Planifiée"].includes(s)) return <Badge label={s} color="info" />;
-  if (s === "Refusée") return <Badge label={s} color="danger" />;
-  if (["En cours","En maintenance","À surveiller"].includes(s)) return <Badge label={s} color="orange" />;
-  if (s === "Hors service") return <Badge label={s} color="danger" />;
+  if (["Refusée","Annulée","Hors service"].includes(s)) return <Badge label={s} color="danger" />;
+  if (["En cours","En maintenance","À surveiller","Reportée","En attente de pièces"].includes(s)) return <Badge label={s} color="orange" />;
   return <Badge label={s} color="muted" />;
 };
 const Card = ({ children, style = {} }) => (
@@ -384,32 +383,50 @@ const ModalValidation = ({ reservation, action, onConfirm, onClose }) => {
   );
 };
 
-const FormulaireReservation = ({ currentUser, onSubmit, onClose }) => {
+const FormulaireReservation = ({ currentUser, materiel, onSubmit, onClose }) => {
   const [evenement, setEvenement] = useState("");
   const [autreEvt, setAutreEvt] = useState("");
   const [site, setSite] = useState("");
   const [dateDebut, setDateDebut] = useState("");
   const [dateFin, setDateFin] = useState("");
+  const [emailContact, setEmailContact] = useState("");
+  const [telContact, setTelContact] = useState("");
   const [selection, setSelection] = useState({});
   const [catOuverte, setCatOuverte] = useState(null);
   const [saving, setSaving] = useState(false);
+  const [error, setError] = useState("");
 
   const evtFinal = evenement === "Autre" ? autreEvt : evenement;
-  const setQte = (id, val) => {
-    const n = Math.max(0, parseInt(val) || 0);
+  const setQte = (id, val, maxDisponible) => {
+    const n = Math.max(0, Math.min(parseInt(val) || 0, maxDisponible));
     if (n === 0) { const s = { ...selection }; delete s[id]; setSelection(s); }
     else setSelection({ ...selection, [id]: n });
   };
   const lignes = Object.entries(selection).map(([id, qte]) => {
-    const mat = Object.values(MATERIEL_PAR_CAT).flat().find(m => m.id === parseInt(id));
-    return { nom: mat?.nom, qte };
+    const mat = Object.values(materiel).flat().find(m => m.id === parseInt(id));
+    return { nom: mat?.nom, qte, materielId: parseInt(id) };
   }).filter(l => l.qte > 0 && l.nom);
   const valid = evtFinal && dateDebut && dateFin && lignes.length > 0;
 
   const handleSubmit = async () => {
     if (!valid) return;
+    if (new Date(dateFin) <= new Date(dateDebut)) {
+      setError("La date de retour doit être après la date de sortie.");
+      return;
+    }
     setSaving(true);
+    setError("");
     try {
+      // Re-vérifier la disponibilité en temps réel avant de valider
+      const fraisMateriel = await db.get("materiel");
+      for (const l of lignes) {
+        const m = (fraisMateriel || []).find(x => x.id === l.materielId);
+        if (!m || m.disponible < l.qte) {
+          setError(`Stock insuffisant pour "${l.nom}" (${m?.disponible || 0} disponible(s)).`);
+          setSaving(false);
+          return;
+        }
+      }
       const res = await db.insert("reservations", {
         demandeur: currentUser.nom,
         user_id: null,
@@ -419,6 +436,8 @@ const FormulaireReservation = ({ currentUser, onSubmit, onClose }) => {
         date_fin: dateFin,
         statut: "En attente",
         commentaire: "",
+        email: emailContact,
+        tel: telContact,
       });
       if (res && res[0]) {
         const resId = res[0].id;
@@ -427,7 +446,7 @@ const FormulaireReservation = ({ currentUser, onSubmit, onClose }) => {
         }
         onSubmit({ ...res[0], lignes });
       }
-    } catch(e) { console.error(e); }
+    } catch(e) { console.error(e); setError("Une erreur est survenue."); }
     setSaving(false);
   };
 
@@ -442,6 +461,16 @@ const FormulaireReservation = ({ currentUser, onSubmit, onClose }) => {
             {EVENEMENTS_CATALOGUE.map(e => <option key={e}>{e}</option>)}
           </select>
           {evenement === "Autre" && <input style={{ ...inp, marginTop: 8 }} placeholder="Préciser…" value={autreEvt} onChange={e => setAutreEvt(e.target.value)} />}
+        </div>
+        <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 12, marginBottom: 14 }}>
+          <div>
+            <label style={{ fontSize: 13, fontWeight: 600 }}>Email de contact</label>
+            <input type="email" style={{ ...inp, marginTop: 4 }} placeholder="votre.email@ffjudo.com" value={emailContact} onChange={e => setEmailContact(e.target.value)} />
+          </div>
+          <div>
+            <label style={{ fontSize: 13, fontWeight: 600 }}>Téléphone de contact</label>
+            <input type="tel" style={{ ...inp, marginTop: 4 }} placeholder="06 XX XX XX XX" value={telContact} onChange={e => setTelContact(e.target.value)} />
+          </div>
         </div>
         <div style={{ marginBottom: 14 }}>
           <label style={{ fontSize: 13, fontWeight: 600 }}>Site</label>
@@ -463,7 +492,7 @@ const FormulaireReservation = ({ currentUser, onSubmit, onClose }) => {
         <div style={{ marginBottom: 14 }}>
           <label style={{ fontSize: 13, fontWeight: 600 }}>Matériel demandé *</label>
           <div style={{ marginTop: 8, border: `1px solid ${COLORS.border}`, borderRadius: 10, overflow: "hidden" }}>
-            {Object.entries(MATERIEL_PAR_CAT).map(([cat, items]) => (
+            {Object.entries(materiel).map(([cat, items]) => (
               <div key={cat}>
                 <button onClick={() => setCatOuverte(catOuverte === cat ? null : cat)}
                   style={{ width: "100%", padding: "11px 14px", background: catOuverte === cat ? COLORS.light : "#fafafa", border: "none", borderBottom: `1px solid ${COLORS.border}`, cursor: "pointer", textAlign: "left", fontWeight: 600, fontSize: 13, display: "flex", justifyContent: "space-between" }}>
@@ -477,9 +506,9 @@ const FormulaireReservation = ({ currentUser, onSubmit, onClose }) => {
                       <div style={{ fontSize: 12, color: item.disponible > 0 ? COLORS.success : COLORS.danger }}>{item.disponible} disponible(s) / {item.qte} au total</div>
                     </div>
                     <div style={{ display: "flex", alignItems: "center", gap: 6 }}>
-                      <button onClick={() => setQte(item.id, (selection[item.id] || 0) - 1)} style={{ width: 30, height: 30, borderRadius: 6, border: `1px solid ${COLORS.border}`, background: "#fff", cursor: "pointer", fontWeight: 700, fontSize: 16 }}>−</button>
+                      <button onClick={() => setQte(item.id, (selection[item.id] || 0) - 1, item.disponible)} style={{ width: 30, height: 30, borderRadius: 6, border: `1px solid ${COLORS.border}`, background: "#fff", cursor: "pointer", fontWeight: 700, fontSize: 16 }}>−</button>
                       <span style={{ width: 32, textAlign: "center", fontWeight: 700, color: selection[item.id] ? COLORS.primary : COLORS.muted }}>{selection[item.id] || 0}</span>
-                      <button onClick={() => setQte(item.id, Math.min((selection[item.id] || 0) + 1, item.disponible))} disabled={(selection[item.id] || 0) >= item.disponible}
+                      <button onClick={() => setQte(item.id, (selection[item.id] || 0) + 1, item.disponible)} disabled={(selection[item.id] || 0) >= item.disponible}
                         style={{ width: 30, height: 30, borderRadius: 6, border: `1px solid ${COLORS.border}`, background: "#fff", cursor: "pointer", fontWeight: 700, fontSize: 16, opacity: (selection[item.id] || 0) >= item.disponible ? 0.35 : 1 }}>+</button>
                     </div>
                   </div>
@@ -494,6 +523,7 @@ const FormulaireReservation = ({ currentUser, onSubmit, onClose }) => {
             {lignes.map((l, i) => <div key={i}>• {l.nom} × {l.qte}</div>)}
           </div>
         )}
+        {error && <div style={{ background: "#fee2e2", color: COLORS.danger, borderRadius: 8, padding: "10px 14px", fontSize: 13, marginBottom: 16 }}>⚠️ {error}</div>}
         <div style={{ display: "flex", gap: 10 }}>
           <button style={{ ...btnP, opacity: (valid && !saving) ? 1 : 0.5 }} disabled={!valid || saving} onClick={handleSubmit}>
             {saving ? "Envoi…" : "Envoyer la demande"}
@@ -575,8 +605,50 @@ export default function App() {
   const handleConfirm = async (comment) => {
     const newStatut = modal.action === "valider" ? "Validée" : "Refusée";
     await db.update("reservations", modal.reservation.id, { statut: newStatut, commentaire: comment });
-    setReservations(r => r.map(x => x.id === modal.reservation.id ? { ...x, statut: newStatut, commentaire: comment } : x));
+
+    // Si validée : déduire le stock disponible
+    if (newStatut === "Validée") {
+      for (const ligne of (modal.reservation.lignes || [])) {
+        const matCorrespondant = Object.values(materiel).flat().find(m => m.nom === ligne.nom);
+        if (matCorrespondant) {
+          const nouvelleQte = Math.max(0, matCorrespondant.disponible - ligne.qte);
+          await db.update("materiel", matCorrespondant.id, { disponible: nouvelleQte });
+        }
+      }
+      await loadData();
+    } else {
+      setReservations(r => r.map(x => x.id === modal.reservation.id ? { ...x, statut: newStatut, commentaire: comment } : x));
+    }
     setModal(null);
+  };
+
+  const handleMarquerRendu = async (reservation) => {
+    await db.update("reservations", reservation.id, { statut: "Rendue", date_retour_reelle: new Date().toISOString() });
+    // Restituer le stock
+    for (const ligne of (reservation.lignes || [])) {
+      const matCorrespondant = Object.values(materiel).flat().find(m => m.nom === ligne.nom);
+      if (matCorrespondant) {
+        const nouvelleQte = Math.min(matCorrespondant.qte, matCorrespondant.disponible + ligne.qte);
+        await db.update("materiel", matCorrespondant.id, { disponible: nouvelleQte });
+      }
+    }
+    await loadData();
+  };
+
+  const handleAnnuler = async (reservation) => {
+    const ancienStatut = reservation.statut;
+    await db.update("reservations", reservation.id, { statut: "Annulée" });
+    // Si elle était validée, restituer le stock
+    if (ancienStatut === "Validée") {
+      for (const ligne of (reservation.lignes || [])) {
+        const matCorrespondant = Object.values(materiel).flat().find(m => m.nom === ligne.nom);
+        if (matCorrespondant) {
+          const nouvelleQte = Math.min(matCorrespondant.qte, matCorrespondant.disponible + ligne.qte);
+          await db.update("materiel", matCorrespondant.id, { disponible: nouvelleQte });
+        }
+      }
+    }
+    await loadData();
   };
 
   const submitMaint = async () => {
@@ -686,7 +758,7 @@ export default function App() {
   return (
     <div style={{ fontFamily: "'Segoe UI', sans-serif", background: "#f5f7fb", minHeight: "100vh", color: COLORS.text }}>
       {modal && <ModalValidation reservation={modal.reservation} action={modal.action} onConfirm={handleConfirm} onClose={() => setModal(null)} />}
-      {showReservForm && <FormulaireReservation currentUser={currentUser} onSubmit={(d) => { setReservations(r => [...r, d]); setShowReservForm(false); }} onClose={() => setShowReservForm(false)} />}
+      {showReservForm && <FormulaireReservation currentUser={currentUser} materiel={materiel} onSubmit={(d) => { setReservations(r => [...r, d]); setShowReservForm(false); loadData(); }} onClose={() => setShowReservForm(false)} />}
 
       <div style={{ background: COLORS.primary, padding: "0 24px", display: "flex", alignItems: "center", gap: 12, height: 56 }}>
         <div style={{ background: "#fff", borderRadius: 8, width: 44, height: 34, display: "flex", alignItems: "center", justifyContent: "center", padding: "2px 4px" }}>
@@ -730,6 +802,11 @@ export default function App() {
                 </Card>
               ))}
             </div>
+
+            <div style={{ marginBottom: 24 }}>
+              <CalendrierHebdo reservations={reservations} maintenances={maintenances} />
+            </div>
+
             <div style={{ display: "flex", gap: 20, flexWrap: "wrap" }}>
               <Card style={{ flex: 2, minWidth: 300 }}>
                 <h3 style={{ margin: "0 0 16px", fontSize: 15 }}>Dernières réservations</h3>
@@ -790,12 +867,20 @@ export default function App() {
                           <td style={{ padding: "12px", fontSize: 12, color: COLORS.muted }}>{r.commentaire || <span style={{ fontStyle: "italic" }}>—</span>}</td>
                           {isAdmin && (
                             <td style={{ padding: "12px" }}>
-                              {r.statut === "En attente" && (
-                                <div style={{ display: "flex", gap: 6 }}>
-                                  <button style={btnS} onClick={() => setModal({ reservation: r, action: "valider" })}>✓</button>
-                                  <button style={btnD} onClick={() => setModal({ reservation: r, action: "refuser" })}>✗</button>
-                                </div>
-                              )}
+                              <div style={{ display: "flex", gap: 6, flexWrap: "wrap" }}>
+                                {r.statut === "En attente" && (
+                                  <>
+                                    <button style={btnS} onClick={() => setModal({ reservation: r, action: "valider" })}>✓</button>
+                                    <button style={btnD} onClick={() => setModal({ reservation: r, action: "refuser" })}>✗</button>
+                                  </>
+                                )}
+                                {r.statut === "Validée" && (
+                                  <>
+                                    <button style={{ ...btnG, fontSize: 12, padding: "5px 10px" }} onClick={() => handleMarquerRendu(r)}>↩️ Rendu</button>
+                                    <button style={{ ...btnD, fontSize: 12, padding: "5px 10px" }} onClick={() => handleAnnuler(r)}>Annuler</button>
+                                  </>
+                                )}
+                              </div>
                             </td>
                           )}
                         </tr>
