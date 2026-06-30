@@ -381,7 +381,7 @@ export default function App() {
   const [tab, setTab] = useState("dashboard");
   const [materiel, setMateriel] = useState({});
   const [equipements, setEquipements] = useState([]);
-  const [espacesData] = useState([]);
+  const [espacesData, setEspacesData] = useState([]);
   const [prestataires, setPrestataires] = useState([]);
   const [reservations, setReservations] = useState([]);
   const [maintenances, setMaintenances] = useState([]);
@@ -395,13 +395,14 @@ export default function App() {
   const loadData = async () => {
     setLoading(true);
     try {
-      const [res, maint, mat, eq, prest, lignesAll] = await Promise.all([
+      const [res, maint, mat, eq, prest, lignesAll, esp] = await Promise.all([
         db.get("reservations"),
         db.get("maintenances"),
         db.get("materiel"),
         db.get("equipements"),
         db.get("prestataires"),
         db.get("lignes_reservation"),
+        db.get("espaces"),
       ]);
       const matParCat = {};
       (mat || []).forEach(m => {
@@ -411,6 +412,7 @@ export default function App() {
       setMateriel(matParCat);
       setEquipements(eq || []);
       setPrestataires(prest || []);
+      setEspacesData(esp || []);
       const resAvecLignes = (res || []).map(r => ({
         ...r,
         lignes: (lignesAll || []).filter(l => l.reservation_id === r.id).map(l => ({ nom: l.materiel_nom, qte: l.quantite })),
