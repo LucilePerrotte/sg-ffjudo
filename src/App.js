@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 
-const SUPABASE_URL = "https://ljwqdsoqwwqetlqmoyks.supabase.co";
-const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxqd3Fkc29nd3dxZXRscW1veWtzIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI3NDAxMjEsImV4cCI6MjA5ODMxNjEyMX0.Z-ZQD87GQvxLTIzb1GPzeDG7sCI55sXZfVzaVh39wvU";
+const SUPABASE_URL = "https://gubzyphacaeriuxifkqy.supabase.co";
+const SUPABASE_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imd1Ynp5cGhhY2Flcml1eGlma3F5Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODI3OTY0NDYsImV4cCI6MjA5ODM3MjQ0Nn0.xvGZl2rrAJpk__jWni8i43-gNQrieadmk68qUy8OTEI";
 
 const db = {
   async get(table, filters = {}) {
