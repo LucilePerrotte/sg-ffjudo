@@ -381,7 +381,7 @@ export default function App() {
   const [tab, setTab] = useState("dashboard");
   const [materiel, setMateriel] = useState({});
   const [equipements, setEquipements] = useState([]);
-  const [espacesData, setEspacesData] = useState([]);
+  const [espacesData] = useState([]);
   const [prestataires, setPrestataires] = useState([]);
   const [reservations, setReservations] = useState([]);
   const [maintenances, setMaintenances] = useState([]);
